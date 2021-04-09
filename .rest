@@ -2,7 +2,7 @@ GET http://localhost:3000/api/books
 
 ###
 
-GET http://localhost:3000/api/books/1
+GET http://localhost:3000/api/books/3
 
 ###
 
@@ -10,20 +10,20 @@ POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "title": "JAJAJAJA",
-    "author": "CONNOR",
-    "genre": "Experiment"
+    "title": "War Of Art",
+    "author": "Steven Pressfield",
+    "genre": "Strategy"
 }
 
 ###
 
-PUT http://localhost:3000/api/books/6
+PUT http://localhost:3000/api/books/1
 Content-Type: application/json
 
 {
-    "title": "Homo Deuce"
+    "title": "Eloquent JavaScript"
 }
 
 ###
 
-DELETE http://localhost:3000/api/books/1
+DELETE http://localhost:3000/api/books/4
