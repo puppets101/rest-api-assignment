@@ -1,5 +1,6 @@
 const express = require("express");
-const books = require("./Books");
+const json = require("./bookList.json");
+const books = json.BookList;
 const app = express();
 const port = 3000;
 
