@@ -7,3 +7,23 @@ GET http://localhost:3000/api/books/1
 ###
 
 POST http://localhost:3000/api/books
+Content-Type: application/json
+
+{
+    "title": "JAJAJAJA",
+    "author": "CONNOR",
+    "genre": "Experiment"
+}
+
+###
+
+PUT http://localhost:3000/api/books/6
+Content-Type: application/json
+
+{
+    "title": "Homo Deuce"
+}
+
+###
+
+DELETE http://localhost:3000/api/books/1
