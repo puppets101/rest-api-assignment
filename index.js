@@ -35,36 +35,31 @@ app.get("/api/books/:id", (req, res) => {
 
 app.post("/api/books", (req, res) => {
   const book = req.body;
-
-  const titleToSave = book.title;
-  const authorToSave = book.author;
-  const genreToSave = book.genre;
-
   let idToSave = 0;
   books.forEach((book) => {
     if (book.id > idToSave) {
       idToSave = book.id;
     }
   });
+  idToSave++;
+  const newBook = {
+    id: idToSave,
+    title: book.title,
+    author: book.author,
+    genre: book.genre,
+  };
   if (!book.title)
     return res.json({ msg: "Please provide a title to add the book." });
   if (!book.author)
     return res.json({ msg: "Please provide a author to add the book." });
   if (!book.genre)
     return res.json({ msg: "Please provide a genre to add the book." });
-
-  idToSave++;
-  books.push({
-    id: idToSave,
-    title: titleToSave,
-    author: authorToSave,
-    genre: genreToSave,
-  });
+  books.push(newBook);
   res.json({ msg: `${book.title} has been added` });
 });
 
 app.put("/api/books/:id", (req, res) => {
-  const book = books.find((b) => b.id === parseInt(req.params.id));
+  const book = books.find((book) => book.id === parseInt(req.params.id));
   if (!book) {
     res.json({ msg: "The book with the provided ID does not exist." });
     return;
@@ -80,15 +75,14 @@ app.put("/api/books/:id", (req, res) => {
 });
 
 app.delete("/api/books/:id", (req, res) => {
-  const book = books.find((b) => b.id === parseInt(req.params.id));
+  const book = books.find((book) => book.id === parseInt(req.params.id));
   if (!book) {
     res.json({ msg: "The book with the provided ID does not exist." });
     return;
   }
   const index = books.indexOf(book);
   books.splice(index, 1);
-
-  res.json(books);
+  res.json({ msg: `Book with the ID of ${book.id} has been deleted.` });
 });
 
 app.listen(port, () => console.log(`Running on port http://localhost:${port}`));
