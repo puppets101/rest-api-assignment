@@ -23,7 +23,9 @@ async function getAllBooks() {
   ul.innerHTML = "";
   books.forEach((book) => {
     const li = document.createElement("li");
-    li.appendChild(document.createTextNode(JSON.stringify(book)));
+    li.appendChild(document.createTextNode(book.title + " - "));
+    li.appendChild(document.createTextNode(book.author + " - "));
+    li.appendChild(document.createTextNode(book.genre));
     ul.appendChild(li);
   });
   return books;
@@ -36,7 +38,9 @@ async function getSpecificBook(id) {
   ul.innerHTML = "";
   console.log(book);
   const li = document.createElement("li");
-  li.appendChild(document.createTextNode(JSON.stringify(book)));
+  li.appendChild(document.createTextNode(book.title + " - "));
+  li.appendChild(document.createTextNode(book.author + " - "));
+  li.appendChild(document.createTextNode(book.genre));
   ul.appendChild(li);
   return book;
 }

@@ -2,7 +2,7 @@ GET http://localhost:3000/api/books
 
 ###
 
-GET http://localhost:3000/api/books/3
+GET http://localhost:3000/api/books/2
 
 ###
 
@@ -21,9 +21,11 @@ PUT http://localhost:3000/api/books/1
 Content-Type: application/json
 
 {
-    "title": "Eloquent JavaScript"
+    "title": "Home Deus",
+    "author": "Yuval Noah Harrari",
+    "genre": "History/Science"
 }
 
 ###
 
-DELETE http://localhost:3000/api/books/4
+DELETE http://localhost:3000/api/books/2
