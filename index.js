@@ -23,7 +23,7 @@ app.get("/api/books", (req, res) => {
   });
 });
 
-// Get single book
+// Get specific book
 app.get("/api/books/:id", (req, res) => {
   fs.readFile("./bookList.json", (err, data) => {
     data = fs.readFileSync("./bookList.json");
@@ -116,7 +116,7 @@ app.delete("/api/books/:id", (req, res) => {
     }
     const book = books.find((book) => book.id === parseInt(req.params.id));
     if (!book) {
-      return res.json("The book with the provided ID does not exist."), err;
+      return res.json("The book with the provided ID does not exist.");
     }
     const { id } = req.params;
     const index = books.findIndex(

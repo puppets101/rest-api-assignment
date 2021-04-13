@@ -6,16 +6,19 @@ async function main() {
 }
 
 function addEventListeners() {
-  // Get all books button
+  // Hanlde form submit
+  // const form = document.getElementById("form");
+  // form.addEventListener("submit", handleFormSubmit);
+  // Get all books
   const allBooksBtn = document.getElementById("allBooks");
   allBooksBtn.addEventListener("click", getAllBooks);
-  // Get specific book button
+  // Get specific book
   const specificBookBtn = document.getElementById("specificBook");
   specificBookBtn.addEventListener("click", getSpecificBook);
-  // Add new book
+  // Add book
   const addNewBookBtn = document.getElementById("addBook");
-  addNewBookBtn.addEventListener("click", addNewBook);
-  // Update Book
+  addNewBookBtn.addEventListener("click", addBook);
+  // Update book
   const updateBookBtn = document.getElementById("updateBook");
   updateBookBtn.addEventListener("click", updateBook);
   // Delete book
@@ -32,22 +35,27 @@ function clearUl() {
   ul.innerHTML = "";
 }
 
-async function addNewBook(title, author, genre) {
-  const form = document.getElementById("form");
-  console.log(form);
-  console.log("New book added");
-  const body = { title: title, author: author, genre: genre };
-  const newBook = {
-    title: title,
-    author: author,
-    genre: genre,
-  };
-  const status = await requestResource("/api/books", "POST", body);
-  const ul = document.getElementById("list");
-  const li = document.createElement("li");
-  li.appendChild(document.createTextNode(JSON.stringify(newBook)));
-  ul.appendChild(li);
-  return status;
+// function handleFormSubmit(e) {
+//   e.preventDefault();
+
+//   const data = new FormData(e.target);
+//   const formJSON = Object.fromEntries(data.entries());
+
+//   const newBook = JSON.stringify(formJSON, null, 2);
+//   addBookFromForm(newBook);
+// }
+
+// async function addBookFromForm(newBook) {
+//   console.log(newBook);
+// }
+
+async function addBook(title, author, genre) {
+  let body = { title: title, author: author, genre: genre };
+  const book = await requestResource("/api/books", "POST", body);
+  clearUl();
+  const p = document.getElementById("para");
+  p.innerHTML = "Book added";
+  return book;
 }
 
 async function getAllBooks() {
@@ -66,7 +74,7 @@ async function getAllBooks() {
 }
 
 async function getSpecificBook(id) {
-  const book = await requestResource("/api/books/" + "5", "GET");
+  const book = await requestResource("/api/books/" + "1", "GET");
   clearParagraph();
   const ul = document.getElementById("list");
   ul.innerHTML = "";
@@ -81,13 +89,13 @@ async function getSpecificBook(id) {
 async function updateBook(id) {
   const book = await requestResource("/api/books/" + "2", "PUT");
   const p = document.getElementById("para");
-  p.innerHTML = "Book updated";
   clearUl();
+  p.innerHTML = "Book updated";
   return book;
 }
 
 async function deleteBook(id) {
-  const book = await requestResource("/api/books/" + "1", "DELETE");
+  const book = await requestResource("/api/books/" + "2", "DELETE");
   const p = document.getElementById("para");
   clearUl();
   p.innerHTML = "Book deleted";

@@ -21,13 +21,13 @@ PUT http://localhost:3000/api/books/2
 Content-Type: application/json
 
 {
-    "title": "Homo Deuce",
+    "title": "Sapiens",
     "author": "Yuval Noah Harrari",
     "genre": "History/Science"
 }
 
 ###
 
-DELETE http://localhost:3000/api/books/2
+DELETE http://localhost:3000/api/books/5
 
 ###
