@@ -15,34 +15,21 @@ function addEventListeners() {
   // Add new book
   const addNewBookBtn = document.getElementById("addBook");
   addNewBookBtn.addEventListener("click", addNewBook);
+  // Update Book
+  const updateBookBtn = document.getElementById("updateBook");
+  updateBookBtn.addEventListener("click", updateBook);
+  // Delete book
+  const deleteBookBtn = document.getElementById("deleteBook");
+  deleteBookBtn.addEventListener("click", deleteBook);
 }
 
-async function getAllBooks() {
-  const books = await requestResource("/api/books", "GET");
-  const ul = document.getElementById("list");
-  ul.innerHTML = "";
-  books.forEach((book) => {
-    const li = document.createElement("li");
-    li.appendChild(document.createTextNode(book.title + " - "));
-    li.appendChild(document.createTextNode(book.author + " - "));
-    li.appendChild(document.createTextNode(book.genre));
-    ul.appendChild(li);
-  });
-  return books;
+function clearParagraph() {
+  const p = document.getElementById("para");
+  p.innerHTML = "";
 }
-
-async function getSpecificBook(id) {
-  //   const book = await requestResource("/api/books/" + id, "GET");
-  const book = await requestResource("/api/books/" + "2", "GET");
+function clearUl() {
   const ul = document.getElementById("list");
   ul.innerHTML = "";
-  console.log(book);
-  const li = document.createElement("li");
-  li.appendChild(document.createTextNode(book.title + " - "));
-  li.appendChild(document.createTextNode(book.author + " - "));
-  li.appendChild(document.createTextNode(book.genre));
-  ul.appendChild(li);
-  return book;
 }
 
 async function addNewBook(title, author, genre) {
@@ -60,8 +47,51 @@ async function addNewBook(title, author, genre) {
   const li = document.createElement("li");
   li.appendChild(document.createTextNode(JSON.stringify(newBook)));
   ul.appendChild(li);
-  console.log(status);
   return status;
+}
+
+async function getAllBooks() {
+  const books = await requestResource("/api/books", "GET");
+  clearParagraph();
+  const ul = document.getElementById("list");
+  ul.innerHTML = "";
+  books.forEach((book) => {
+    const li = document.createElement("li");
+    li.appendChild(document.createTextNode(book.title + " - "));
+    li.appendChild(document.createTextNode(book.author + " - "));
+    li.appendChild(document.createTextNode(book.genre));
+    ul.appendChild(li);
+  });
+  return books;
+}
+
+async function getSpecificBook(id) {
+  const book = await requestResource("/api/books/" + "5", "GET");
+  clearParagraph();
+  const ul = document.getElementById("list");
+  ul.innerHTML = "";
+  const li = document.createElement("li");
+  li.appendChild(document.createTextNode(book.title + " - "));
+  li.appendChild(document.createTextNode(book.author + " - "));
+  li.appendChild(document.createTextNode(book.genre));
+  ul.appendChild(li);
+  return book;
+}
+
+async function updateBook(id) {
+  const book = await requestResource("/api/books/" + "2", "PUT");
+  const p = document.getElementById("para");
+  p.innerHTML = "Book updated";
+  clearUl();
+  return book;
+}
+
+async function deleteBook(id) {
+  const book = await requestResource("/api/books/" + "1", "DELETE");
+  const p = document.getElementById("para");
+  clearUl();
+  p.innerHTML = "Book deleted";
+  return book;
 }
 
 async function requestResource(url, method, body) {

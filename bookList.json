@@ -7,14 +7,32 @@
   },
   {
     "id": 2,
-    "title": "Sapiens",
+    "title": "Homo Deuce",
     "author": "Yuval Noah Harrari",
-    "genre": "History"
+    "genre": "History/Science"
   },
   {
     "id": 3,
     "title": "Flow",
     "author": "Mihaly Csikszentmihalyi",
     "genre": "Psychology"
+  },
+  {
+    "id": 4,
+    "title": "Healing Mushrooms",
+    "author": "Tero Isokauppila",
+    "genre": "Health"
+  },
+  {
+    "id": 5,
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "genre": "Business"
+  },
+  {
+    "id": 6,
+    "title": "Superintelligence",
+    "author": "Nick Boström",
+    "genre": "Science"
   }
 ]
