@@ -51,15 +51,14 @@ app.post("/api/books", (req, res) => {
       return res.status(404).json(books);
     }
 
-    const book = req.body;
     let idToSave = 0;
     books.forEach((book) => {
       if (book.id > idToSave) {
         idToSave = book.id;
       }
     });
-
     idToSave++;
+    const book = req.body;
     const newBook = {
       id: idToSave,
       title: book.title,
@@ -95,14 +94,14 @@ app.put("/api/books/:id", (req, res) => {
     if (!book) {
       return res.json("The book with the provided ID does not exist.");
     }
-    const index = books.findIndex((book) => book.id === parseInt(id));
+    // const index = books.findIndex((book) => book.id === parseInt(id));
     const updatedBook = {
-      title: "req.body.title",
-      author: "req.body.author",
-      genre: "req.body.genre",
+      id: req.body.id,
+      title: req.body.title,
+      author: req.body.author,
+      genre: req.body.genre,
     };
-    books.splice(index, 1, updatedBook);
-    console.log(books);
+    books.splice(book, 1, updatedBook);
 
     fs.writeFile("./bookList.json", JSON.stringify(books, null, 2), (err) => {
       if (err) {

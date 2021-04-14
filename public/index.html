@@ -13,7 +13,8 @@
     <main class="container mt-4">
         <h1 class="text-center mb-3">Books REST API</h1>
         <!-- action="/api/books" method="POST" -->
-    <form id="addBookForm" class="mb-4">
+    <form id="form" class="mb-4">
+        <h4>Add Book</h4>
         <div class="form-group">
             <label for="title">Title</label>
             <input id="titleInput" type="text" name="title" class="form-control">
@@ -27,17 +28,27 @@
             <input id="genreInput" type="genre" name="genre" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary btn-block mt-2">Add Book</button>
+        <span id="message"></span>
     </form>
     <h4>Book List</h4>
     <button id="allBooks" class="btn btn-secondary btn-block mt-2">Get All Books</button>
-    <button id="specificBook" class="btn btn-secondary btn-block mt-2">Get Specific Book</button>
-    <!-- <button id="addBook" class="btn btn-secondary btn-block mt-2">Add Book</button> -->
     <button id="updateBook" class="btn btn-secondary btn-block mt-2">Update Book</button>
     <button id="deleteBook" class="btn btn-secondary btn-block mt-2">Delete Book</button>
     <p id="para">
         <!-- Injected by JavaScript -->
     </p>
     <ul id="list" class="list-group">
+        <!-- Injected by JavaScript -->
+    </ul>
+    <form id="getSpecificBook" class="mb-4">
+        <h4>Get Specific Book</h4>
+        <div class="form-group">
+            <label for="id">Id</label>
+            <input id="idInput" type="text" name="id" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-2">Get Specific Book</button>
+    </form>
+    <ul id="specificBook" class="list-group">
         <!-- Injected by JavaScript -->
     </ul>
     <a href="/api/books" class="btn btn-light mt-4">Visit API</a>
