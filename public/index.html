@@ -12,25 +12,26 @@
 <body>
     <main class="container mt-4">
         <h1 class="text-center mb-3">Books REST API</h1>
-    <!-- <form action="/api/books" method="POST" id="form" class="mb-4">
+        <!-- action="/api/books" method="POST" -->
+    <form id="addBookForm" class="mb-4">
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" type="text" name="title" class="form-control">
+            <input id="titleInput" type="text" name="title" class="form-control">
         </div>
         <div class="form-group">
             <label for="author">Author</label>
-            <input id="author" type="author" name="author" class="form-control">
+            <input id="authorInput" type="author" name="author" class="form-control">
         </div>
         <div class="form-group">
             <label for="genre">Genre</label>
-            <input id="genre" type="genre" name="genre" class="form-control">
+            <input id="genreInput" type="genre" name="genre" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary btn-block mt-2">Add Book</button>
-    </form> -->
+    </form>
     <h4>Book List</h4>
     <button id="allBooks" class="btn btn-secondary btn-block mt-2">Get All Books</button>
     <button id="specificBook" class="btn btn-secondary btn-block mt-2">Get Specific Book</button>
-    <button id="addBook" class="btn btn-secondary btn-block mt-2">Add Book</button>
+    <!-- <button id="addBook" class="btn btn-secondary btn-block mt-2">Add Book</button> -->
     <button id="updateBook" class="btn btn-secondary btn-block mt-2">Update Book</button>
     <button id="deleteBook" class="btn btn-secondary btn-block mt-2">Delete Book</button>
     <p id="para">

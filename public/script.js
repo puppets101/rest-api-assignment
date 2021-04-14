@@ -6,24 +6,40 @@ async function main() {
 }
 
 function addEventListeners() {
-  // Hanlde form submit
-  // const form = document.getElementById("form");
-  // form.addEventListener("submit", handleFormSubmit);
+  // Handle add book form submit
+  const form = document.getElementById("addBookForm");
+  form.addEventListener("submit", handleAddBookFormSubmit);
   // Get all books
   const allBooksBtn = document.getElementById("allBooks");
   allBooksBtn.addEventListener("click", getAllBooks);
   // Get specific book
   const specificBookBtn = document.getElementById("specificBook");
   specificBookBtn.addEventListener("click", getSpecificBook);
-  // Add book
-  const addNewBookBtn = document.getElementById("addBook");
-  addNewBookBtn.addEventListener("click", addBook);
   // Update book
   const updateBookBtn = document.getElementById("updateBook");
   updateBookBtn.addEventListener("click", updateBook);
   // Delete book
   const deleteBookBtn = document.getElementById("deleteBook");
   deleteBookBtn.addEventListener("click", deleteBook);
+}
+
+function handleAddBookFormSubmit() {
+  console.log("Book Added");
+
+  const titleInput = document.getElementById("titleInput");
+  const titleValue = titleInput.value;
+  const authorInput = document.getElementById("authorInput");
+  const authorValue = authorInput.value;
+  const genreInput = document.getElementById("genreInput");
+  const genreValue = genreInput.value;
+
+  const newBook = {
+    title: titleValue,
+    author: authorValue,
+    genre: genreValue,
+  };
+  const { title, author, genre } = newBook;
+  addBook(title, author, genre);
 }
 
 function clearParagraph() {
@@ -35,33 +51,12 @@ function clearUl() {
   ul.innerHTML = "";
 }
 
-// function handleFormSubmit(e) {
-//   e.preventDefault();
-
-//   const data = new FormData(e.target);
-//   const formJSON = Object.fromEntries(data.entries());
-
-//   const newBook = JSON.stringify(formJSON, null, 2);
-//   addBookFromForm(newBook);
-// }
-
-// async function addBookFromForm(newBook) {
-//   console.log(newBook);
-// }
-
 async function addBook(title, author, genre) {
-  const body = { title: "title", author: "author", genre: "genre" };
+  const body = { title: title, author: author, genre: genre };
   const book = await requestResource("/api/books", "POST", body);
   clearUl();
   const p = document.getElementById("para");
   p.innerHTML = "Book added";
-  const ul = document.getElementById("list");
-  ul.innerHTML = "";
-  const li = document.createElement("li");
-  li.appendChild(document.createTextNode(body.title + " - "));
-  li.appendChild(document.createTextNode(body.author + " - "));
-  li.appendChild(document.createTextNode(body.genre));
-  ul.appendChild(li);
   return book;
 }
 
