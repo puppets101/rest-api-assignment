@@ -25,17 +25,18 @@ app.get("/api/books", (req, res) => {
 
 // Get specific book
 app.get("/api/books/:id", (req, res) => {
+  const id = req.params.id;
   fs.readFile("./bookList.json", (err, data) => {
     data = fs.readFileSync("./bookList.json");
     const books = JSON.parse(data.toString());
     if (err) {
       return res.status(404).json(books);
     }
-    const book = books.find((book) => book.id === parseInt(req.params.id));
+    const book = books.find((book) => book.id === parseInt(id));
     if (!book) {
-      return res.status(404).json({
-        msg: `There is no book with the provided id of ${req.params.id}`,
-      });
+      return res
+        .status(404)
+        .json(`There is no book with the provided id of ${id}`);
     }
     res.json(book);
   });
@@ -65,14 +66,16 @@ app.post("/api/books", (req, res) => {
       author: book.author,
       genre: book.genre,
     };
-    if (!book.title) return res.json("Please provide a title to add the book.");
+    if (!book.title)
+      return res.status(400).json("Please provide a title to add the book.");
     if (!book.author)
-      return res.json("Please provide a author to add the book.");
-    if (!book.genre) return res.json("Please provide a genre to add the book.");
+      return res.status(400).json("Please provide a author to add the book.");
+    if (!book.genre)
+      return res.status(400).json("Please provide a genre to add the book.");
     books.push(newBook);
     fs.writeFile("./bookList.json", JSON.stringify(books, null, 2), (err) => {
       if (err) {
-        return res.status(400);
+        return res.status(400).json(books);
       }
       res.status(201).json(`${book.title} has been added`);
     });
@@ -82,20 +85,24 @@ app.post("/api/books", (req, res) => {
 // Update book
 app.put("/api/books/:id", (req, res) => {
   fs.readFile("./bookList.json", (err, data) => {
+    const { id } = req.params;
     data = fs.readFileSync("./bookList.json");
     const books = JSON.parse(data.toString());
     if (err) {
       return res.status(404).json(books);
     }
-    const book = books.find((book) => book.id === parseInt(req.params.id));
+    const book = books.find((book) => book.id === parseInt(id));
     if (!book) {
       return res.json("The book with the provided ID does not exist.");
     }
-
-    const { title, author, genre } = req.body;
-    if (title) book.title = title;
-    if (author) book.author = author;
-    if (genre) book.genre = genre;
+    const index = books.findIndex((book) => book.id === parseInt(id));
+    const updatedBook = {
+      title: "req.body.title",
+      author: "req.body.author",
+      genre: "req.body.genre",
+    };
+    books.splice(index, 1, updatedBook);
+    console.log(books);
 
     fs.writeFile("./bookList.json", JSON.stringify(books, null, 2), (err) => {
       if (err) {
@@ -109,19 +116,17 @@ app.put("/api/books/:id", (req, res) => {
 // Delete book
 app.delete("/api/books/:id", (req, res) => {
   fs.readFile("./bookList.json", (err, data) => {
+    const { id } = req.params;
     data = fs.readFileSync("./bookList.json");
     const books = JSON.parse(data.toString());
     if (err) {
       return res.status(400).json(books);
     }
-    const book = books.find((book) => book.id === parseInt(req.params.id));
+    const book = books.find((book) => book.id === parseInt(id));
     if (!book) {
       return res.json("The book with the provided ID does not exist.");
     }
-    const { id } = req.params;
-    const index = books.findIndex(
-      (book) => book.id === parseInt(req.params.id)
-    );
+    const index = books.findIndex((book) => book.id === parseInt(id));
     books.splice(index, 1);
     fs.writeFile("./bookList.json", JSON.stringify(books, null, 2), (err) => {
       if (err) {

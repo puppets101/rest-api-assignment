@@ -50,11 +50,18 @@ function clearUl() {
 // }
 
 async function addBook(title, author, genre) {
-  let body = { title: title, author: author, genre: genre };
+  const body = { title: "title", author: "author", genre: "genre" };
   const book = await requestResource("/api/books", "POST", body);
   clearUl();
   const p = document.getElementById("para");
   p.innerHTML = "Book added";
+  const ul = document.getElementById("list");
+  ul.innerHTML = "";
+  const li = document.createElement("li");
+  li.appendChild(document.createTextNode(body.title + " - "));
+  li.appendChild(document.createTextNode(body.author + " - "));
+  li.appendChild(document.createTextNode(body.genre));
+  ul.appendChild(li);
   return book;
 }
 
@@ -74,7 +81,7 @@ async function getAllBooks() {
 }
 
 async function getSpecificBook(id) {
-  const book = await requestResource("/api/books/" + "1", "GET");
+  const book = await requestResource("/api/books/" + "3", "GET");
   clearParagraph();
   const ul = document.getElementById("list");
   ul.innerHTML = "";
@@ -86,8 +93,9 @@ async function getSpecificBook(id) {
   return book;
 }
 
-async function updateBook(id) {
-  const book = await requestResource("/api/books/" + "2", "PUT");
+async function updateBook(id, title, author, genre) {
+  const body = { title: "title", author: "author", genre: "genre" };
+  const book = await requestResource("/api/books/" + "2", "PUT", body);
   const p = document.getElementById("para");
   clearUl();
   p.innerHTML = "Book updated";
@@ -95,7 +103,7 @@ async function updateBook(id) {
 }
 
 async function deleteBook(id) {
-  const book = await requestResource("/api/books/" + "2", "DELETE");
+  const book = await requestResource("/api/books/" + "1", "DELETE");
   const p = document.getElementById("para");
   clearUl();
   p.innerHTML = "Book deleted";
@@ -105,10 +113,10 @@ async function deleteBook(id) {
 async function requestResource(url, method, body) {
   const response = await fetch(url, {
     method: method,
-    body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(body),
   });
 
   const result = await response.json();

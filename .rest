@@ -2,7 +2,7 @@ GET http://localhost:3000/api/books
 
 ###
 
-GET http://localhost:3000/api/books/2
+GET http://localhost:3000/api/books/3
 
 ###
 
