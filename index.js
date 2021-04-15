@@ -94,14 +94,14 @@ app.put("/api/books/:id", (req, res) => {
     if (!book) {
       return res.json("The book with the provided ID does not exist.");
     }
-    // const index = books.findIndex((book) => book.id === parseInt(id));
+    const index = books.findIndex((book) => book.id === parseInt(id));
     const updatedBook = {
       id: req.body.id,
       title: req.body.title,
       author: req.body.author,
       genre: req.body.genre,
     };
-    books.splice(book, 1, updatedBook);
+    books.splice(index, 1, updatedBook);
 
     fs.writeFile("./bookList.json", JSON.stringify(books, null, 2), (err) => {
       if (err) {

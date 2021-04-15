@@ -164,6 +164,7 @@ async function updateBook(
     "PUT",
     body
   );
+  getAllBooks();
   return books;
 }
 
