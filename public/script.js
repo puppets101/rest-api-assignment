@@ -58,8 +58,48 @@ function handleGetSpecificBookSubmit(e) {
 }
 
 function handleUpdateBook() {
+  const updateBookForm = document.getElementById("updateBookForm");
+  updateBookForm.classList.add("showForm");
   const book = this;
   console.log(book);
+
+  const updateIdInput = document.getElementById("updateIdInput");
+  updateIdInput.value = book.id;
+  updatedIdValue = updateIdInput.value;
+  const updateTitleInput = document.getElementById("updateTitleInput");
+  updateTitleInput.value = book.title;
+  updatedTitleValue = updateTitleInput.value;
+  const updateAuthorInput = document.getElementById("updateAuthorInput");
+  updateAuthorInput.value = book.author;
+  updatedAuthorValue = updateAuthorInput.value;
+  const updateGenreInput = document.getElementById("updateGenreInput");
+  updateGenreInput.value = book.genre;
+  updatedGenreValue = updateGenreInput.value;
+
+  const updateBookFormSubmit = document.getElementById("updateBookForm");
+  updateBookFormSubmit.addEventListener("submit", handleUpdateBookEvent);
+}
+
+function handleUpdateBookEvent(e) {
+  e.preventDefault();
+  const updateIdInput = document.getElementById("updateIdInput").value;
+  const updateTitleInput = document.getElementById("updateTitleInput").value;
+  const updateAuthorInput = document.getElementById("updateAuthorInput").value;
+  const updateGenreInput = document.getElementById("updateGenreInput").value;
+  console.log(
+    Number(updateIdInput),
+    updateTitleInput,
+    updateAuthorInput,
+    updateGenreInput
+  );
+  updateBook(
+    Number(updateIdInput),
+    updateTitleInput,
+    updateAuthorInput,
+    updateGenreInput
+  );
+  updateBookForm.classList.remove("showForm");
+  updateBookForm.classList.add("hideForm");
 }
 
 async function addBook(title, author, genre) {
@@ -106,10 +146,25 @@ async function getSpecificBook(id) {
   return book;
 }
 
-async function updateBook(id, title, author, genre) {
-  const body = { id: id, title: title, author: author, genre: genre };
-  const book = await requestResource("/api/books/" + id, "PUT", body);
-  return book;
+async function updateBook(
+  updateIdInput,
+  updateTitleInput,
+  updateAuthorInput,
+  updateGenreInput
+) {
+  const body = {
+    id: updateIdInput,
+    title: updateTitleInput,
+    author: updateAuthorInput,
+    genre: updateGenreInput,
+  };
+  console.log(body);
+  const books = await requestResource(
+    `/api/books/${updateIdInput}`,
+    "PUT",
+    body
+  );
+  return books;
 }
 
 async function deleteBook() {

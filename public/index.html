@@ -10,6 +10,7 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./style.css">
     <script src="./script.js"></script>
     <script
       src="https://kit.fontawesome.com/fa62c3a7c2.js"
@@ -27,6 +28,49 @@
       <ul id="list" class="list-group">
         <!-- Injected by JavaScript -->
       </ul>
+      <form id="updateBookForm" class="hideForm my-4">
+        <h4>Update Book</h4>
+        <div class="form-group">
+          <label for="id">Id</label>
+          <input
+            id="updateIdInput"
+            type="text"
+            name="id"
+            class="form-control"
+            disabled
+          />
+        </div>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            id="updateTitleInput"
+            type="text"
+            name="title"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input
+            id="updateAuthorInput"
+            type="author"
+            name="author"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <input
+            id="updateGenreInput"
+            type="genre"
+            name="genre"
+            class="form-control"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-2">
+          Update Book
+        </button>
+      </form>
       <form id="addBookForm" class="my-4">
         <h4>Add Book</h4>
         <div class="form-group">
