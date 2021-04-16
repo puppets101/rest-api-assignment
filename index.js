@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.send("REST API - BOOKS");
 });
 
-// Get books
+// GET BOOKS
 app.get("/api/books", (req, res) => {
   fs.readFile("./bookList.json", (err, data) => {
     data = fs.readFileSync("./bookList.json");
@@ -23,7 +23,7 @@ app.get("/api/books", (req, res) => {
   });
 });
 
-// Get specific book
+// GET SPECIFIC BOOK
 app.get("/api/books/:id", (req, res) => {
   const id = req.params.id;
   fs.readFile("./bookList.json", (err, data) => {
@@ -42,7 +42,7 @@ app.get("/api/books/:id", (req, res) => {
   });
 });
 
-// Create book
+// CREATE BOOK
 app.post("/api/books", (req, res) => {
   fs.readFile("./bookList.json", (err, data) => {
     data = fs.readFileSync("./bookList.json");
@@ -66,11 +66,11 @@ app.post("/api/books", (req, res) => {
       genre: book.genre,
     };
     if (!book.title)
-      return res.status(400).json("Please provide a title to add the book.");
+      return res.status(400).json("Please provide title to add the book.");
     if (!book.author)
-      return res.status(400).json("Please provide a author to add the book.");
+      return res.status(400).json("Please provide author to add the book.");
     if (!book.genre)
-      return res.status(400).json("Please provide a genre to add the book.");
+      return res.status(400).json("Please provide genre to add the book.");
     books.push(newBook);
     fs.writeFile("./bookList.json", JSON.stringify(books, null, 2), (err) => {
       if (err) {
@@ -81,7 +81,7 @@ app.post("/api/books", (req, res) => {
   });
 });
 
-// Update book
+// UPDATE BOOK
 app.put("/api/books/:id", (req, res) => {
   fs.readFile("./bookList.json", (err, data) => {
     const { id } = req.params;
@@ -112,7 +112,7 @@ app.put("/api/books/:id", (req, res) => {
   });
 });
 
-// Delete book
+// DELETE BOOK
 app.delete("/api/books/:id", (req, res) => {
   fs.readFile("./bookList.json", (err, data) => {
     const { id } = req.params;
@@ -138,4 +138,5 @@ app.delete("/api/books/:id", (req, res) => {
   });
 });
 
+// LISTEN
 app.listen(port, () => console.log(`Running on port http://localhost:${port}`));

@@ -20,14 +20,14 @@
   </head>
   <body>
     <main class="container mt-4">
-      <h1 class="text-center mb-3">Books REST API</h1>
-      <h4>Book List</h4>
+      <h1 class="text-center mb-3">REST API - BOOKS</h1>
       <button id="allBooks" class="btn btn-secondary btn-block mt-2">
         Get All Books
       </button>
       <ul id="list" class="list-group my-2">
         <!-- Injected by JavaScript -->
       </ul>
+      <!-- UPDATE BOOK FORM -->
       <form id="updateBookForm" class="hideForm my-4">
         <h4>Update Book</h4>
         <div class="form-group">
@@ -71,6 +71,9 @@
           Update Book
         </button>
       </form>
+      <!-- END UPDATE BOOK FORM -->
+
+      <!-- ADD BOOK FORM -->
       <form id="addBookForm" class="my-4">
         <h4>Add Book</h4>
         <div class="form-group">
@@ -104,6 +107,9 @@
           Add Book
         </button>
       </form>
+      <!-- END ADD BOOK FORM -->
+
+      <!-- GET SPECIFIC BOOK FORM -->
       <form id="getSpecificBook" class="mb-4">
         <h4>Find Specific Book</h4>
         <div class="form-group">
@@ -117,6 +123,9 @@
       <ul id="specificBook" class="list-group">
         <!-- Injected by JavaScript -->
       </ul>
+       <!-- END GET SPECIFIC BOOK FORM -->
+
+       <!-- LINK TO API -->
       <a href="/api/books" class="btn btn-light my-4">Visit API</a>
     </main>
   </body>
