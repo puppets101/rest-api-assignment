@@ -96,7 +96,7 @@ app.put("/api/books/:id", (req, res) => {
     }
     const index = books.findIndex((book) => book.id === parseInt(id));
     const updatedBook = {
-      id: req.body.id,
+      id: Number(req.params.id),
       title: req.body.title,
       author: req.body.author,
       genre: req.body.genre,
@@ -123,7 +123,9 @@ app.delete("/api/books/:id", (req, res) => {
     }
     const book = books.find((book) => book.id === parseInt(id));
     if (!book) {
-      return res.json("The book with the provided ID does not exist.");
+      return res
+        .status(400)
+        .json("The book with the provided ID does not exist.");
     }
     const index = books.findIndex((book) => book.id === parseInt(id));
     books.splice(index, 1);
